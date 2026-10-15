@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MiniRobot.Application/MiniRobot.Application.csproj" />
+    <Project Path="src/MiniRobot.Domain/MiniRobot.Domain.csproj" />
+    <Project Path="src/MiniRobot.Infrastructure/MiniRobot.Infrastructure.csproj" />
+    <Project Path="src/MiniRobot.Worker/MiniRobot.Worker.csproj" />
+  </Folder>
+</Solution>
