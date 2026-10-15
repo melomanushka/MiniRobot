@@ -1,4 +1,6 @@
-﻿namespace MiniRobot.Domain.Entities;
+﻿using MiniRobot.Domain.Enums;
+
+namespace MiniRobot.Domain.Entities;
 
 public class PurchaseOrder
 {
@@ -7,6 +9,6 @@ public class PurchaseOrder
     public Guid SupplierId { get; set; }
     public Supplier Supplier { get; set; } = null!;
     public DateTime CreatedAt { get; set; }
-    //TODO: Status - после enums
+    public PurchaseOrderStatus Status { get; set; }
     public List<PurchaseOrderLine> Lines { get; set; } = [];
 }

@@ -1,4 +1,6 @@
-﻿namespace MiniRobot.Domain.Entities;
+﻿using MiniRobot.Domain.Enums;
+
+namespace MiniRobot.Domain.Entities;
 
 public class OperatorQuestion
 {
@@ -12,5 +14,5 @@ public class OperatorQuestion
 
     public DateTime AskedAt { get; set; }
     public DateTime? AnsweredAt { get; set; }
-    // TODO: Status — после enums (открыт / отвечен)
+    public OperatorQuestionStatus Status { get; set; }
 }
