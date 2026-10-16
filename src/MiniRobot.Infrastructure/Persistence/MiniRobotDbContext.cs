@@ -77,10 +77,29 @@ public class MiniRobotDbContext(DbContextOptions<MiniRobotDbContext> options) : 
              .HasForeignKey(x => x.PurchaseOrderId)
              .OnDelete(DeleteBehavior.Restrict);
 
-            // TODO (сама): связь с Lines и связь с Questions — по образцу PurchaseOrder → Lines
+            e.HasMany(x => x.Lines)
+             .WithOne(l => l.IncomingDocument)
+             .HasForeignKey(l => l.IncomingDocumentId)
+             .OnDelete(DeleteBehavior.Cascade);
+
+            e.HasMany(x => x.Questions)
+             .WithOne(q => q.IncomingDocument)
+             .HasForeignKey(q => q.IncomingDocumentId)
+             .OnDelete(DeleteBehavior.Cascade);               // удалили документ — удалились вопросы по нему
         });
 
-        // TODO (сама): IncomingDocumentLine — длины Sku и Name, точность Quantity и UnitPrice, по образцу PurchaseOrderLine
-        // TODO (сама): OperatorQuestion — длина Text (например, 2000) и индекс по Status
+        modelBuilder.Entity<IncomingDocumentLine>(e =>
+        {
+            e.Property(x => x.Sku).HasMaxLength(64);
+            e.Property(x => x.Name).HasMaxLength(512);
+            e.Property(x => x.Quantity).HasPrecision(18, 3);
+            e.Property(x => x.UnitPrice).HasPrecision(18, 2);
+        });
+
+        modelBuilder.Entity<OperatorQuestion>(e =>
+        {
+            e.Property(x => x.Text).HasMaxLength(2000);
+            e.HasIndex(x => x.Status);
+        });
     }
 }
